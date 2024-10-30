@@ -29,15 +29,19 @@ $(function() {
     var expand = $("#page-search-expand");
     var searchLink = $("span#page-search-link");
     var redirect = $("input#search-redirect");
+    
     function setSearchUrlTemplate() {
-        var href = document.location.href.split(/[#?]/)[0];
-        href += "?q=" + "%s";
-        if (redirect.is(":checked")) {
-            href += "&r=1";
-        }
-        searchLink.html(href);
-        copy[0].onmouseenter();
+    var href = document.location.href.split(/[#?]/)[0];
+    href += "?q=" + "%s";
+    if (redirect.is(":checked")) {
+        href += "&r=1";
     }
+    
+    searchLink.text(href); // Usamos .text() en lugar de .html() para evitar la inyección de HTML
+    
+    copy[0].onmouseenter();
+    }
+
     function copyLink(e) {
         var textarea = document.createElement("textarea");
         textarea.style.height = 0;
